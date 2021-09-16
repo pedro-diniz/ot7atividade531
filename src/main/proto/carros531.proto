@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "Carros531";
+
+package br.com.zup.edu;
+
+import "google/protobuf/timestamp.proto";
+
+service Carros531Service {
+  rpc send (Carros531Request) returns (Carros531Response) {}
+}
+
+message Carros531Request {
+  string modelo = 1;
+  string placa = 2;
+  int32 ano = 3;
+
+  message Proprietario {
+    string nome = 1;
+    string cpf = 2;
+  }
+  Proprietario proprietario = 4;
+
+  enum TipoCombustivel {
+    UNKNOWN_COMBUSTIVEL = 0; // Faltou isso pra resposta do especialista
+    GASOLINA = 1;
+    ALCOOL = 2;
+    FLEX = 3;
+  }
+  TipoCombustivel combustivel = 5;
+}
+
+message Carros531Response {
+  string UUID = 1;
+  google.protobuf.Timestamp criadoEm = 2;
+}
